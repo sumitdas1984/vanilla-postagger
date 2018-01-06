@@ -1,4 +1,4 @@
-#Training our own POS Tagger using scikit-learn
+# Training our own POS Tagger using scikit-learn
 
 Part-Of-Speech tagging (or POS tagging, for short) is one of the main components of almost any NLP analysis. The task of POS-tagging simply implies labelling words with their appropriate Part-Of-Speech (Noun, Verb, Adjective, Adverb, Pronoun etc).
 
