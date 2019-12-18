@@ -73,7 +73,7 @@ def train_tagger():
 	    ('classifier', DecisionTreeClassifier(criterion='entropy'))
 	])
 	 
-	clf.fit(X[:10000], y[:10000])   # Use only the first 10K samples if you're running it multiple times. It takes a fair bit :)
+	clf.fit(X[:20000], y[:20000])   # Use only the first 20K samples if you're running it multiple times. It takes a fair bit :)
 	 
 	print('Training completed')
 	 
