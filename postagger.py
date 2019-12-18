@@ -11,7 +11,7 @@ import pickle
 from postagger_train import features
 
 # load the model from disk
-clf = pickle.load(open('vanilla_postagger_model.pkl', 'rb'))
+clf = pickle.load(open('vanilla_postagger_model.sav', 'rb'))
 
 def pos_tag(sentence):
     tagged_sentence = []

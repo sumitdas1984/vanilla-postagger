@@ -5,5 +5,7 @@ Part-Of-Speech tagging (or POS tagging, for short) is one of the main components
 Here, I have trained my own POS tagger by using Penn Treebank POS tagged corpus available inside NLTK. I have used  DecisionTreeClassifier in scikit-learn library to train the ML model.
 
 ## Run Instruction
+
 Training: python postagger_train.py
+
 Testing: python postagger.py
