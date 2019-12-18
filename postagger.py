@@ -10,4 +10,4 @@ def pos_tag(sentence):
     tags = clf.predict([features(sentence, index) for index in range(len(sentence))])
     return zip(sentence, tags)
  
-print pos_tag(word_tokenize('This is my friend, John.'))
+print(list(pos_tag(word_tokenize('This is my friend, John.'))))
