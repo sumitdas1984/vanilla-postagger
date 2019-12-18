@@ -1,3 +1,11 @@
+'''
+description : this is the training module for the postagger
+author      : Sumit
+date        : 25/12/2018
+
+run instruction: python postagger_train.py
+'''
+
 import nltk
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.feature_extraction import DictVectorizer
@@ -44,7 +52,6 @@ def transform_to_dataset(tagged_sentences):
  
 
 def train_tagger():
-	# tagged_sentences = nltk.corpus.brown.tagged_sents()
 	tagged_sentences = nltk.corpus.treebank.tagged_sents()
 	 
 	# print tagged_sentences[0]
@@ -56,29 +63,27 @@ def train_tagger():
 	training_sentences = tagged_sentences[:cutoff]
 	test_sentences = tagged_sentences[cutoff:]
 	 
-	print(len(training_sentences))   # 2935
-	print(len(test_sentences))         # 979
+	print("Train dataset: ", len(training_sentences))   # 2935
+	print("Test dataset: ", len(test_sentences))         # 979
 	 
 	X, y = transform_to_dataset(training_sentences)
 
-	print(X[0])
+	clf = Pipeline([
+	    ('vectorizer', DictVectorizer(sparse=False)),
+	    ('classifier', DecisionTreeClassifier(criterion='entropy'))
+	])
+	 
+	clf.fit(X[:10000], y[:10000])   # Use only the first 10K samples if you're running it multiple times. It takes a fair bit :)
+	 
+	print('Training completed')
+	 
+	X_test, y_test = transform_to_dataset(test_sentences)
+	 
+	print("Accuracy:", clf.score(X_test, y_test))
 
-	# clf = Pipeline([
-	#     ('vectorizer', DictVectorizer(sparse=False)),
-	#     ('classifier', DecisionTreeClassifier(criterion='entropy'))
-	# ])
-	 
-	# clf.fit(X[:10000], y[:10000])   # Use only the first 10K samples if you're running it multiple times. It takes a fair bit :)
-	 
-	# print('Training completed')
-	 
-	# X_test, y_test = transform_to_dataset(test_sentences)
-	 
-	# print("Accuracy:", clf.score(X_test, y_test))
-
-	# # save the model to disk
-	# filename = 'vanilla_postagger_model.sav'
-	# pickle.dump(clf, open(filename, 'wb'))
+	# save the model to disk
+	filename = 'vanilla_postagger_model.sav'
+	pickle.dump(clf, open(filename, 'wb'))
 
 
 if __name__ == '__main__':
