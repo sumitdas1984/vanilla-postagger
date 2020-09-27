@@ -18,4 +18,4 @@ def pos_tag(sentence):
     tags = clf.predict([features(sentence, index) for index in range(len(sentence))])
     return zip(sentence, tags)
  
-print(list(pos_tag(word_tokenize('This is my friend, Jiva. She works in Microsoft.'))))
+print(list(pos_tag(word_tokenize('This is from inside directory'))))
