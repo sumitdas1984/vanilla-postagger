@@ -79,7 +79,7 @@ def train_tagger():
 	 
 	X_test, y_test = transform_to_dataset(test_sentences)
 	 
-	print("The calculated accuracy:", clf.score(X_test, y_test))
+	print("Model Accuracy:", clf.score(X_test, y_test))
 
 	# save the model to disk
 	filename = 'vanilla_postagger_model.sav'
