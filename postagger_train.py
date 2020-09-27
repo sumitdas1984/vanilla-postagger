@@ -75,16 +75,15 @@ def train_tagger():
 	 
 	clf.fit(X[:10000], y[:10000])   # Use only the first 10K samples if you're running it multiple times. It takes a fair bit :)
 	 
-	print('Training completed')
+	print('Training run completed')
 	 
 	X_test, y_test = transform_to_dataset(test_sentences)
 	 
-	print("Accuracy:", clf.score(X_test, y_test))
+	print("The calculated accuracy:", clf.score(X_test, y_test))
 
 	# save the model to disk
 	filename = 'vanilla_postagger_model.sav'
 	pickle.dump(clf, open(filename, 'wb'))
-
 
 if __name__ == '__main__':
 	train_tagger()
