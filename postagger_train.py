@@ -52,38 +52,39 @@ def transform_to_dataset(tagged_sentences):
  
 
 def train_tagger():
-	tagged_sentences = nltk.corpus.treebank.tagged_sents()
-	 
-	# print tagged_sentences[0]
-	print("Tagged sentences: ", len(tagged_sentences))
-	print("Tagged words:", len(nltk.corpus.brown.tagged_words()))
+    tagged_sentences = nltk.corpus.treebank.tagged_sents()
 
-	# Split the dataset for training and testing
-	cutoff = int(.75 * len(tagged_sentences))
-	training_sentences = tagged_sentences[:cutoff]
-	test_sentences = tagged_sentences[cutoff:]
-	 
-	print("Train dataset: ", len(training_sentences))   # 2935
-	print("Test dataset: ", len(test_sentences))         # 979
-	 
-	X, y = transform_to_dataset(training_sentences)
+    # print tagged_sentences[0]
+    print("Tagged sentences: ", len(tagged_sentences))
+    print("Tagged words:", len(nltk.corpus.brown.tagged_words()))
 
-	clf = Pipeline([
-	    ('vectorizer', DictVectorizer(sparse=False)),
-	    ('classifier', DecisionTreeClassifier(criterion='entropy'))
-	])
-	 
-	clf.fit(X[:10000], y[:10000])   # Use only the first 10K samples if you're running it multiple times. It takes a fair bit :)
-	 
-	print('Training run completed')
-	 
-	X_test, y_test = transform_to_dataset(test_sentences)
-	 
-	print("Model Accuracy:", clf.score(X_test, y_test))
+    # Split the dataset for training and testing
+    cutoff = int(.75 * len(tagged_sentences))
+    training_sentences = tagged_sentences[:cutoff]
+    test_sentences = tagged_sentences[cutoff:]
 
-	# save the model to disk
-	filename = 'vanilla_postagger_model.sav'
-	pickle.dump(clf, open(filename, 'wb'))
+    print("Train dataset: ", len(training_sentences))   # 2935
+    print("Test dataset: ", len(test_sentences))         # 979
+
+    X, y = transform_to_dataset(training_sentences)
+
+    clf = Pipeline([
+        ('vectorizer', DictVectorizer(sparse=False)),
+        ('classifier', DecisionTreeClassifier(criterion='entropy'))
+    ])
+
+    clf.fit(X[:10000], y[:10000])   # Use only the first 10K samples if you're running it multiple times. It takes a fair bit :)
+    print("this is a training run")
+    print('Training run completed')
+
+    X_test, y_test = transform_to_dataset(test_sentences)
+
+    print("The calculated accuracy:", clf.score(X_test, y_test))
+    print("training accuracy calculated")
+
+    # save the model to disk
+    filename = 'vanilla_postagger_model.sav'
+    pickle.dump(clf, open(filename, 'wb'))
 
 if __name__ == '__main__':
-	train_tagger()
+    train_tagger()
